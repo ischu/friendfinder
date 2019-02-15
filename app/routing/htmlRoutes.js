@@ -11,11 +11,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // route to homepage
-app.get("/", function(req, res) {
-    res.sendFile(path.join(__dirname, "home.html"));
+var route1= app.get("/", function(req, res) {
+    res.sendFile(path.join(__dirname, "/app/public/home.html"));
   });
 // route to survey page
-  app.get("/survey", function(req, res) {
-    res.sendFile(path.join(__dirname, "survey.html"));
+var route2 =  app.get("/survey", function(req, res) {
+    res.sendFile(path.join(__dirname, "/app/public/survey.html"));
   });
   
+// exports routes to server
+module.exports = route1, route2;
