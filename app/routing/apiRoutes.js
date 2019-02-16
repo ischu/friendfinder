@@ -1,10 +1,13 @@
 // Dependencies
-var express = require("express");
 var path = require("path");
 
-// Sets up the Express App
-var app = express();
-var PORT = process.env.PORT || 3000;
+var respondants = [
+    {
+        name: "sampleName",
+        photo: "sampleURL",
+        answers: ["1", "2", "3", "4", "5"]
+    }
+]
 
 // GET
 // Displays all respondants' survey data
@@ -19,14 +22,14 @@ app.get("/api/respondants/:match", function (req, res) {
 });
 
 // POST
-// Create New Characters - takes in JSON input
-app.post("/api/respondants", function(req, res) {
+// Create New friend - takes in JSON input
+app.post("/api/respondants", function (req, res) {
     // req.body hosts is equal to the JSON post sent from the user
     var newRespondant = req.body;
-  
+
     console.log(newRespondant);
-  
+
     respondants.push(newRespondant);
-  
+
     res.json(newRespondant);
-  });
+});
