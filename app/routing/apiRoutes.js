@@ -9,6 +9,7 @@ var respondants = [
     }
 ]
 
+module.exports = function (app) {
 // GET
 // Displays all respondants' survey data
 app.get("/api/respondants", function (req, res) {
@@ -33,3 +34,4 @@ app.post("/api/respondants", function (req, res) {
 
     res.json(newRespondant);
 });
+};
