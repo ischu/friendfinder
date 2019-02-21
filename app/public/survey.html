@@ -157,19 +157,33 @@
 
 <!--  script for storing survey data  -->
 <script>
+    // validate form to make sure it has been filled out
+
+    // submit button grabs data
     $("#submit").on("click", function (event) {
         event.preventDefault();
         // Here we grab the form elements
         var newFriend = {
             name: $("#nameInput").val().trim(),
             photo: $("#picInput").val().trim(),
-            surveyArray: new Array(),
+            survey: new Array(),
         };
-        $(".custom-select").each(function(i){
-            newFriend.surveyArray.push($(this).val());
-        })
+        $(".custom-select").each(function (i) {
+            newFriend.survey.push($(this).val());
+        });
 
-        console.log(newFriend);
+        // POST survey form data
+        $.post("/api/friends", newFriend,
+            function (data) {
+                if (data) {
+                    console.log(newFriend);
+                } else {
+                    // Trigger a modal if there is no other "friends data" to match with.
+                };
+            }
+        );
+        // GET friend match, render modal
+        $.get("/api/friends/:match");
     });
 
 </script>
