@@ -1,7 +1,7 @@
 // Dependencies
 var path = require("path");
 
-var respondants = [
+var friends = [
     {
         name: "sampleName",
         photo: "sampleURL",
@@ -11,27 +11,27 @@ var respondants = [
 
 module.exports = function (app) {
 // GET
-// Displays all respondants' survey data
-app.get("/api/respondants", function (req, res) {
-    return res.json(respondants);
+// Displays all friends' survey data
+app.get("/api/friends", function (req, res) {
+    return res.json(friends);
 });
 
-// Displays a single respondant, whose survey result is the closest match to user
-app.get("/api/respondants/:match", function (req, res) {
+// Displays a single friend, whose survey result is the closest match to user
+app.get("/api/friends/:match", function (req, res) {
     var match = req.params.match;
-    // code to compare and match user with closest respondant
+    // code to compare and match user with closest friend
 });
 
 // POST
 // Create New friend - takes in JSON input
-app.post("/api/respondants", function (req, res) {
+app.post("/api/friends", function (req, res) {
     // req.body hosts is equal to the JSON post sent from the user
-    var newRespondant = req.body;
+    var newFriend = req.body;
 
-    console.log(newRespondant);
+    console.log(newFriend);
 
-    respondants.push(newRespondant);
+    friends.push(newFriend);
 
-    res.json(newRespondant);
+    res.json(newFriend);
 });
 };
