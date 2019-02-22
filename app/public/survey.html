@@ -38,8 +38,8 @@
                 <option value="1">1- Strongly Disagree</option>
                 <option value="2">2- Disagree</option>
                 <option value="3">3- Nuetral/Don't Know</option>
-                <option value="2">4- Agree</option>
-                <option value="2">5- Strongly Agree</option>
+                <option value="4">4- Agree</option>
+                <option value="5">5- Strongly Agree</option>
             </select>
 
             <h3>Question 2</h3>
@@ -49,8 +49,8 @@
                 <option value="1">1- Strongly Disagree</option>
                 <option value="2">2- Disagree</option>
                 <option value="3">3- Nuetral/Don't Know</option>
-                <option value="2">4- Agree</option>
-                <option value="2">5- Strongly Agree</option>
+                <option value="4">4- Agree</option>
+                <option value="5">5- Strongly Agree</option>
             </select>
 
             <h3>Question 3</h3>
@@ -60,8 +60,8 @@
                 <option value="1">1- Strongly Disagree</option>
                 <option value="2">2- Disagree</option>
                 <option value="3">3- Nuetral/Don't Know</option>
-                <option value="2">4- Agree</option>
-                <option value="2">5- Strongly Agree</option>
+                <option value="4">4- Agree</option>
+                <option value="5">5- Strongly Agree</option>
             </select>
 
             <h3>Question 4</h3>
@@ -71,8 +71,8 @@
                 <option value="1">1- Strongly Disagree</option>
                 <option value="2">2- Disagree</option>
                 <option value="3">3- Nuetral/Don't Know</option>
-                <option value="2">4- Agree</option>
-                <option value="2">5- Strongly Agree</option>
+                <option value="4">4- Agree</option>
+                <option value="5">5- Strongly Agree</option>
             </select>
 
             <h3>Question 5</h3>
@@ -82,8 +82,8 @@
                 <option value="1">1- Strongly Disagree</option>
                 <option value="2">2- Disagree</option>
                 <option value="3">3- Nuetral/Don't Know</option>
-                <option value="2">4- Agree</option>
-                <option value="2">5- Strongly Agree</option>
+                <option value="4">4- Agree</option>
+                <option value="5">5- Strongly Agree</option>
             </select>
 
             <h3>Question 6</h3>
@@ -93,8 +93,8 @@
                 <option value="1">1- Strongly Disagree</option>
                 <option value="2">2- Disagree</option>
                 <option value="3">3- Nuetral/Don't Know</option>
-                <option value="2">4- Agree</option>
-                <option value="2">5- Strongly Agree</option>
+                <option value="4">4- Agree</option>
+                <option value="5">5- Strongly Agree</option>
             </select>
 
             <h3>Question 7</h3>
@@ -104,8 +104,8 @@
                 <option value="1">1- Strongly Disagree</option>
                 <option value="2">2- Disagree</option>
                 <option value="3">3- Nuetral/Don't Know</option>
-                <option value="2">4- Agree</option>
-                <option value="2">5- Strongly Agree</option>
+                <option value="4">4- Agree</option>
+                <option value="5">5- Strongly Agree</option>
             </select>
 
             <h3>Question 8</h3>
@@ -115,8 +115,8 @@
                 <option value="1">1- Strongly Disagree</option>
                 <option value="2">2- Disagree</option>
                 <option value="3">3- Nuetral/Don't Know</option>
-                <option value="2">4- Agree</option>
-                <option value="2">5- Strongly Agree</option>
+                <option value="4">4- Agree</option>
+                <option value="5">5- Strongly Agree</option>
             </select>
 
             <h3>Question 9</h3>
@@ -126,8 +126,8 @@
                 <option value="1">1- Strongly Disagree</option>
                 <option value="2">2- Disagree</option>
                 <option value="3">3- Nuetral/Don't Know</option>
-                <option value="2">4- Agree</option>
-                <option value="2">5- Strongly Agree</option>
+                <option value="4">4- Agree</option>
+                <option value="5">5- Strongly Agree</option>
             </select>
 
             <h3>Question 10</h3>
@@ -137,8 +137,8 @@
                 <option value="1">1- Strongly Disagree</option>
                 <option value="2">2- Disagree</option>
                 <option value="3">3- Nuetral/Don't Know</option>
-                <option value="2">4- Agree</option>
-                <option value="2">5- Strongly Agree</option>
+                <option value="4">4- Agree</option>
+                <option value="5">5- Strongly Agree</option>
             </select>
         </div>
         <br>
@@ -159,10 +159,9 @@
 <script>
     // validate form to make sure it has been filled out
 
-    // submit button grabs data
     $("#submit").on("click", function (event) {
         event.preventDefault();
-        // Here we grab the form elements
+        // Grab the form values
         var newFriend = {
             name: $("#nameInput").val().trim(),
             photo: $("#picInput").val().trim(),
@@ -171,19 +170,26 @@
         $(".custom-select").each(function (i) {
             newFriend.survey.push($(this).val());
         });
-
+        var match = null;
         // POST survey form data
         $.post("/api/friends", newFriend,
             function (data) {
                 if (data) {
-                    console.log(newFriend);
+                    // will return closest friend match after posting
+                    match = data;
+                    console.log(match + "New");
+                    // GET friend match, render modal
+                    $.get(`/api/friends/${match}`, function (data) {
+                        console.log(data);
+                    });
                 } else {
                     // Trigger a modal if there is no other "friends data" to match with.
+                    console.log("fail");
                 };
             }
         );
-        // GET friend match, render modal
-        $.get("/api/friends/:match");
+        console.log(match);
+
     });
 
 </script>
